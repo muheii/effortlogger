@@ -1,0 +1,16 @@
+.root {
+	-fx-padding: 60px;
+}
+
+.title-label {
+	-fx-font-size: 48px;
+}
+
+.step-label {
+	-fx-font-size: 18px;
+	-fx-padding: 10px 0px 10px 0px;
+}
+
+.button {
+	-fx-font-size: 12px;	
+}

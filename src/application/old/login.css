@@ -1,0 +1,11 @@
+.root {
+	-fx-padding: 200px 400px 0.0px 400px;
+}
+
+.login-label {
+	-fx-font-size: 48px;
+}
+
+.p-label {
+	-fx-font-size: 18px;
+}
