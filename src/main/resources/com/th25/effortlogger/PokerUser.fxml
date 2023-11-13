@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="com.th25.effortlogger.PokerUserController">
+   <children>
+      <Label fx:id="selectedText" layoutX="276.0" layoutY="312.0" text="Estimate:" />
+      <Label fx:id="storyLabel" layoutX="141.0" layoutY="74.0" prefHeight="161.0" prefWidth="324.0" />
+      <Button layoutX="147.0" layoutY="343.0" mnemonicParsing="false" onAction="#estimateSelection" text="1" />
+      <Button layoutX="170.0" layoutY="343.0" mnemonicParsing="false" onAction="#estimateSelection" text="2" />
+      <Button layoutX="193.0" layoutY="343.0" mnemonicParsing="false" onAction="#estimateSelection" text="3" />
+      <Button layoutX="216.0" layoutY="343.0" mnemonicParsing="false" onAction="#estimateSelection" text="5" />
+      <Button layoutX="239.0" layoutY="343.0" mnemonicParsing="false" onAction="#estimateSelection" text="8" />
+      <Button layoutX="261.0" layoutY="343.0" mnemonicParsing="false" onAction="#estimateSelection" prefHeight="25.0" prefWidth="30.0" text="13" />
+      <Button layoutX="291.0" layoutY="343.0" mnemonicParsing="false" onAction="#estimateSelection" prefHeight="25.0" prefWidth="30.0" text="21" />
+      <Button layoutX="345.0" layoutY="343.0" mnemonicParsing="false" onAction="#sendEstimate" text="Submit Estimate" />
+      <Label fx:id="meanText" layoutX="14.0" layoutY="14.0" text="Mean: " />
+   </children>
+</AnchorPane>

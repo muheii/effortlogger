@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="com.th25.effortlogger.PokerHostController">
+   <children>
+      <TextArea fx:id="storyTextArea" layoutX="137.0" layoutY="81.0" prefHeight="200.0" prefWidth="327.0" />
+      <Button layoutX="263.0" layoutY="295.0" mnemonicParsing="false" onAction="#sendStory" text="Send Story" />
+   </children>
+</AnchorPane>

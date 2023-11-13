@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="com.th25.effortlogger.EffortLoggerController">
+   <children>
+      <Label layoutX="75.0" layoutY="75.0" text="Effort Logger">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="179.0" text="1. When you start a new activity, press the &quot;Start an Activity&quot; button.">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="93.0" layoutY="217.0" mnemonicParsing="false" onAction="#startActivity" text="Start an Activity">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="225.0" layoutY="217.0" mnemonicParsing="false" text="Proceed to Defect Log Console">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="74.0" layoutY="265.0" text="2. Select the project, life cycle step, effort category, and deliverable from the following lists:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="projectComboBox" layoutX="92.0" layoutY="305.0" onAction="#updateProjectDropdowns" prefHeight="31.0" prefWidth="321.0" />
+      <ComboBox fx:id="lifeCycleComboBox" layoutX="421.0" layoutY="305.0" prefHeight="31.0" prefWidth="321.0" />
+      <ComboBox fx:id="effortCategoryComboBox" layoutX="92.0" layoutY="345.0" onAction="#updateDependentDropdowns" prefHeight="31.0" prefWidth="238.0" />
+      <ComboBox fx:id="dependentComboBox" layoutX="337.0" layoutY="345.0" prefHeight="31.0" prefWidth="405.0" />
+      <Label layoutX="77.0" layoutY="385.0" text="3. Press the &quot;Stop this Activity&quot; button to generate an effort log entry using the attributes above.">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="93.0" layoutY="421.0" mnemonicParsing="false" onAction="#stopActivity" text="Stop this Activity">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="232.0" layoutY="421.0" mnemonicParsing="false" onAction="#editEffort" text="Proceed to Effort Log Editor">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="77.0" layoutY="470.0" text="4. Unless you are done for the day, it is best to perform steps 1 and 2 above before resuming work.">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Text fx:id="timerText" layoutX="971.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Text>
+      <Button layoutX="93.0" layoutY="623.0" mnemonicParsing="false" onAction="#openPlanningPoker" prefHeight="31.0" prefWidth="124.0" text="Planning Poker">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
