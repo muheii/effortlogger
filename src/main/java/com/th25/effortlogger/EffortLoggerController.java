@@ -86,8 +86,8 @@ public class EffortLoggerController implements Initializable {
 			    OutputStream os = null;
 			    
 			    try {
-					is = new FileInputStream(new File("effortLogs"));
-			        os = new FileOutputStream(new File("effortLogs.bak"));
+					is = new FileInputStream("effortLogs");
+			        os = new FileOutputStream("effortLogs.bak");
 			        
 			        byte[] buffer = new byte[1024];
 			        int length;
@@ -149,39 +149,31 @@ public class EffortLoggerController implements Initializable {
 	@FXML
 	// Modifies the final combo-box data based on the selected effort category.
 	void updateDependentDropdowns() {
-		switch(effortCategoryComboBox.getValue()) {
-		case "Plans": 
-			dependentOptions = FXCollections.observableArrayList(
-				"Project Plan", 
-				"Risk Managment Plan", 
-				"Conceptual Design Plan", 
-				"Detailed Design Plan", 
-				"Implementation Plan");
-			break;
-		case "Deliverables": 
-			dependentOptions = FXCollections.observableArrayList(
-				"Conceptual Design",
-				"Detailed Design",
-				"Test Cases",
-				"Solution",
-				"Reflection",
-				"Outline",
-				"Draft",
-				"Report",
-				"User Defined",
-				"Other");
-			break;
-		case "Interruptions": 
-			dependentOptions = FXCollections.observableArrayList(
-				"Break",
-				"Phone",
-				"Teammate",
-				"Visitor",
-				"Other");
-			break;
-		case "Defects": 
-			dependentOptions = FXCollections.observableArrayList("");
-			break;
+		switch (effortCategoryComboBox.getValue()) {
+			case "Plans" -> dependentOptions = FXCollections.observableArrayList(
+					"Project Plan",
+					"Risk Managment Plan",
+					"Conceptual Design Plan",
+					"Detailed Design Plan",
+					"Implementation Plan");
+			case "Deliverables" -> dependentOptions = FXCollections.observableArrayList(
+					"Conceptual Design",
+					"Detailed Design",
+					"Test Cases",
+					"Solution",
+					"Reflection",
+					"Outline",
+					"Draft",
+					"Report",
+					"User Defined",
+					"Other");
+			case "Interruptions" -> dependentOptions = FXCollections.observableArrayList(
+					"Break",
+					"Phone",
+					"Teammate",
+					"Visitor",
+					"Other");
+			case "Defects" -> dependentOptions = FXCollections.observableArrayList("");
 		}
 		
 		dependentComboBox.setValue(dependentOptions.get(0));
@@ -243,13 +235,14 @@ public class EffortLoggerController implements Initializable {
 	}
 	
 	@FXML
-	void editEffort(ActionEvent event) throws IOException {
+	void editEffort(ActionEvent event) {
 		StackPane newWindowLayout = new StackPane();
 		Scene newScene = new Scene(newWindowLayout, 720, 400);
 		Stage newWindow = new Stage();
 		
 		newWindow.setTitle("Second Window");
 		newWindow.setScene(newScene);
+		newWindow.setResizable(false);
 		newWindow.show();
 
 		//newWindowLayout.getChildren().add(logEntryLoader.load());
@@ -260,8 +253,10 @@ public class EffortLoggerController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("PokerHome.fxml"));
 		Scene scene = new Scene(root, 600, 400);
 		Stage stage = new Stage();
+
 		stage.setScene(scene);
 		stage.setTitle("Planning Poker");
+		stage.setResizable(false);
 		stage.show();
 	}
 }

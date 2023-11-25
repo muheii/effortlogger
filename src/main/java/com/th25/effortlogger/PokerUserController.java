@@ -54,22 +54,11 @@ public class PokerUserController implements Initializable {
             @Override
             public void run() {
                 try {
-                    HttpClient httpClient = HttpClientBuilder.create().build();
-                    HttpPost request = new HttpPost("http://localhost/Demo/get_info_handler.php");
-
-                    StringEntity params = new StringEntity(roomName);
-
-                    request.addHeader("content-type", "application/x-www-form-urlencoded");
-                    request.setEntity(params);
-
-                    HttpResponse response = httpClient.execute(request);
-                    HttpEntity entity = response.getEntity();
-                    String[] responseArray = EntityUtils.toString(entity, "UTF-8").split("~");
+                    String response = HTTPHelper.sendRequest("http://localhost/Demo/get_info_handler.php", roomName);
+                    String[] responseArray = response.split("~");
 
                     if (responseArray.length == 1) {
-                        Platform.runLater(() -> {
-                            storyLabel.setText(responseArray[0]);
-                        });
+                        Platform.runLater(() -> storyLabel.setText(responseArray[0]));
                     } else if (responseArray.length == 2) {
                         int[] numbers = Arrays.stream(responseArray[1].split(",")).mapToInt(Integer::parseInt).toArray();
 
@@ -93,14 +82,6 @@ public class PokerUserController implements Initializable {
 
     @FXML
     protected void sendEstimate() throws IOException {
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpPost request = new HttpPost("http://localhost/Demo/estimate_handler.php");
-
-        StringEntity params = new StringEntity(roomName + "," + userID + "," + estimate);
-
-        request.addHeader("content-type", "application/x-www-form-urlencoded");
-        request.setEntity(params);
-
-        httpClient.execute(request);
+        HTTPHelper.sendRequest("http://localhost/Demo/estimate_handler.php", roomName + "," + userID + "," + estimate);
     }
 }
