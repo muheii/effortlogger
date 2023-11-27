@@ -1,6 +1,5 @@
 package com.th25.effortlogger;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -8,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,7 +18,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -82,8 +81,8 @@ public class EffortLoggerController implements Initializable {
 		effortLogBackup.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				InputStream is = null;
-			    OutputStream os = null;
+				InputStream is;
+			    OutputStream os;
 			    
 			    try {
 					is = new FileInputStream("effortLogs");
@@ -108,7 +107,7 @@ public class EffortLoggerController implements Initializable {
 	@FXML
 	// Modifies the life cycle combo-box data based on the selected project type.
 	void updateProjectDropdowns() {
-		if(projectComboBox.getValue() == "Business Project") {
+		if(projectComboBox.getValue().equals("Business Project")) {
 			lifeCycleOptions = FXCollections.observableArrayList(
 	        			"Planning",
 	        			"Information Gathering",
@@ -121,7 +120,7 @@ public class EffortLoggerController implements Initializable {
 	        			"Coach Meeting",
 	        			"Stakeholder Meeting"
 	        		);
-		} else if(projectComboBox.getValue() == "Development Project") {
+		} else if(projectComboBox.getValue().equals("Development Project")) {
 			lifeCycleOptions = FXCollections.observableArrayList(
 	        			"Problem Understanding",
 	        			"Conceptual Design Plan",
@@ -152,7 +151,7 @@ public class EffortLoggerController implements Initializable {
 		switch (effortCategoryComboBox.getValue()) {
 			case "Plans" -> dependentOptions = FXCollections.observableArrayList(
 					"Project Plan",
-					"Risk Managment Plan",
+					"Risk Management Plan",
 					"Conceptual Design Plan",
 					"Detailed Design Plan",
 					"Implementation Plan");
@@ -208,7 +207,7 @@ public class EffortLoggerController implements Initializable {
 	}
 	
 	@FXML
-	// Stops the timer and saves all of the effort data into the effort log file.
+	// Stops the timer and saves all the effort data into the effort log file.
 	void stopActivity(ActionEvent event) {
 		if(effortInProgress) {
 			effortInProgress = false;
@@ -250,7 +249,7 @@ public class EffortLoggerController implements Initializable {
 
 	@FXML
 	void openPlanningPoker(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("PokerHome.fxml"));
+		Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("PokerHome.fxml")));
 		Scene scene = new Scene(root, 600, 400);
 		Stage stage = new Stage();
 

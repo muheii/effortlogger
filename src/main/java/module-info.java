@@ -1,4 +1,4 @@
-module com.th25.effortlogger {
+/** @noinspection JavaModuleNaming*/module com.th25.effortlogger {
     requires javafx.controls;
     requires javafx.fxml;
     requires httpclient;

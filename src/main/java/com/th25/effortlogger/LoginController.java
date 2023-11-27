@@ -1,6 +1,7 @@
 package com.th25.effortlogger;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,7 +24,7 @@ public class LoginController {
 	@FXML
 	// Verifies that the user string fits within the guidelines (only alphanumeric characters).
 	public void loginValidation(ActionEvent event) throws IOException {
-		Pattern p = Pattern.compile("^[a-zA-Z0-9_.-]*$");
+		Pattern p = Pattern.compile("^[a-zA-Z\\d_.-]*$");
 		Matcher m = p.matcher(userTextField.getText());
 		
 		boolean b = m.matches();
@@ -58,7 +59,7 @@ public class LoginController {
 	
 	@FXML
 	public void loginSuccess(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("EffortLogger.fxml"));
+		Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("EffortLogger.fxml")));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(root);
 

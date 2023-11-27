@@ -6,13 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +17,7 @@ public class PokerUserController implements Initializable {
     String userID;
     int estimate;
 
-    Timer timer = new Timer();
+    final Timer timer = new Timer();
 
     @FXML
     private Label selectedText;
