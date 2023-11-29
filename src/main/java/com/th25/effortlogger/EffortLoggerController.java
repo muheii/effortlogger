@@ -1,16 +1,9 @@
 package com.th25.effortlogger;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,7 +25,11 @@ public class EffortLoggerController implements Initializable {
 	private int seconds = 0;
 	private int minutes = 0;
 	private int hours = 0;
-	
+
+	// Username value obtained from login screen.
+	private String user;
+	private String UUIDString;
+
 	// Formatted strings used to output the timer onto the user interface.
 	private String secondString, minuteString, hourString;
 	
@@ -40,7 +37,7 @@ public class EffortLoggerController implements Initializable {
 	private boolean effortInProgress = false;
 
 	Timer t = new Timer();
-	
+
 	// Will contain the options for each of the four drop-down menus.
 	ObservableList<String> projectOptions;
 	ObservableList<String> lifeCycleOptions;
@@ -53,12 +50,28 @@ public class EffortLoggerController implements Initializable {
 	@FXML ComboBox<String> effortCategoryComboBox;
 	@FXML ComboBox<String> dependentComboBox;
 	
-	
+
+	public void setUser(String user) {
+		this.user = user;
+		UUIDString = UUID.nameUUIDFromBytes(user.getBytes()).toString();
+
+		// Create the files if they don't already exist.
+		File logFile = new File("logs/" + UUIDString);
+		File backupFile = new File("logs/" + UUIDString + ".bak");
+
+		try {
+			logFile.createNewFile();
+			backupFile.createNewFile();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	@Override
 	// Runs at the very beginning of when EffortLogger.fxml is loaded.
 	public void initialize(URL url, ResourceBundle rb) {
 		Timer effortLogBackup = new Timer();
-		
+
 		// Initializes the drop-down menus into the default states that were in the original Excel workbook.
 		projectOptions = 
         		FXCollections.observableArrayList(
@@ -76,7 +89,7 @@ public class EffortLoggerController implements Initializable {
 					"Others"
 				);
 		effortCategoryComboBox.setItems(effortCategoryOptions);
-		
+
 		// Copies the data in the current logs into a new backup file.
 		effortLogBackup.scheduleAtFixedRate(new TimerTask() {
 			@Override
@@ -85,8 +98,8 @@ public class EffortLoggerController implements Initializable {
 			    OutputStream os;
 			    
 			    try {
-					is = new FileInputStream("effortLogs");
-			        os = new FileOutputStream("effortLogs.bak");
+					is = new FileInputStream("logs/" + UUIDString);
+			        os = new FileOutputStream("logs/" + UUIDString + ".bak");
 			        
 			        byte[] buffer = new byte[1024];
 			        int length;
@@ -100,7 +113,7 @@ public class EffortLoggerController implements Initializable {
 					e.printStackTrace();
 			    }
 			}
-		}, 0, 900000);
+		}, 900000, 900000);
 	}
 	
 	
@@ -213,7 +226,7 @@ public class EffortLoggerController implements Initializable {
 			effortInProgress = false;
 			
 			try {
-				FileWriter logWriter = new FileWriter("effortLogs", true);
+				FileWriter logWriter = new FileWriter("logs/" + UUIDString, true);
 				logWriter.write(projectComboBox.getValue() + "," 
 						+ lifeCycleComboBox.getValue() + "," 
 						+ effortCategoryComboBox.getValue() + "," 
