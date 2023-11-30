@@ -1,4 +1,4 @@
-package com.th25.effortlogger;
+package com.th25.effortlogger.helpers;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

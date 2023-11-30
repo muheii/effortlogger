@@ -1,5 +1,6 @@
 package com.th25.effortlogger;
 
+import com.th25.effortlogger.helpers.HTTPHelper;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 

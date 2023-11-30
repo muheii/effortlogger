@@ -7,4 +7,6 @@
 
     opens com.th25.effortlogger to javafx.fxml;
     exports com.th25.effortlogger;
+    exports com.th25.effortlogger.helpers;
+    opens com.th25.effortlogger.helpers to javafx.fxml;
 }

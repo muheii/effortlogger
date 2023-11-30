@@ -3,8 +3,13 @@ package com.th25.effortlogger;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.*;
 
+import com.th25.effortlogger.helpers.EncryptionHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +22,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 public class EffortLoggerController implements Initializable {
 	
@@ -194,7 +203,7 @@ public class EffortLoggerController implements Initializable {
 	
 	@FXML
 	// Starts the timer and updates the strings every second.
-	void startActivity(ActionEvent event) {
+	void startActivity() {
 		if(!effortInProgress) {
 			t = new Timer();
 			effortInProgress = true;
@@ -221,22 +230,24 @@ public class EffortLoggerController implements Initializable {
 	
 	@FXML
 	// Stops the timer and saves all the effort data into the effort log file.
-	void stopActivity(ActionEvent event) {
+	void stopActivity() {
 		if(effortInProgress) {
 			effortInProgress = false;
 			
 			try {
 				FileWriter logWriter = new FileWriter("logs/" + UUIDString, true);
-				logWriter.write(projectComboBox.getValue() + "," 
-						+ lifeCycleComboBox.getValue() + "," 
-						+ effortCategoryComboBox.getValue() + "," 
+				logWriter.write(EncryptionHelper.encryptLog(projectComboBox.getValue() + ","
+						+ lifeCycleComboBox.getValue() + ","
+						+ effortCategoryComboBox.getValue() + ","
 						+ dependentComboBox.getValue() + ","
-						+ hourString + ":" + minuteString + ":" + secondString + "\n");
+						+ hourString + ":" + minuteString + ":" + secondString, user) + "\n");
 				logWriter.close();
-			} catch (IOException e) {
+			} catch (IOException | InvalidAlgorithmParameterException | NoSuchPaddingException |
+					 IllegalBlockSizeException | NoSuchAlgorithmException | BadPaddingException | InvalidKeyException |
+					 InvalidKeySpecException e) {
 				e.printStackTrace();
 			}
-			
+
 			elapsedTime = 0;
 			seconds = 0;
 			minutes = 0;
@@ -247,7 +258,7 @@ public class EffortLoggerController implements Initializable {
 	}
 	
 	@FXML
-	void editEffort(ActionEvent event) {
+	void editEffort() {
 		StackPane newWindowLayout = new StackPane();
 		Scene newScene = new Scene(newWindowLayout, 720, 400);
 		Stage newWindow = new Stage();
@@ -261,7 +272,7 @@ public class EffortLoggerController implements Initializable {
 	}
 
 	@FXML
-	void openPlanningPoker(ActionEvent event) throws IOException {
+	void openPlanningPoker() throws IOException {
 		Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("PokerHome.fxml")));
 		Scene scene = new Scene(root, 600, 400);
 		Stage stage = new Stage();

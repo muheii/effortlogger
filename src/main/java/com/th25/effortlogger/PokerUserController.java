@@ -1,5 +1,6 @@
 package com.th25.effortlogger;
 
+import com.th25.effortlogger.helpers.HTTPHelper;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
