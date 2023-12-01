@@ -49,7 +49,7 @@ public class PokerHomeController {
         PokerUserController ctrl = loader.getController();
         ctrl.setRoomName(roomName);
 
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Planning Poker - " + roomName);
         stage.setScene(scene);

@@ -52,7 +52,10 @@ public class PokerUserController implements Initializable {
                     String[] responseArray = response.split("~");
 
                     if (responseArray.length == 1) {
-                        Platform.runLater(() -> storyLabel.setText(responseArray[0]));
+                        Platform.runLater(() -> {
+                            storyLabel.setText(responseArray[0]);
+                            meanText.setText("Mean: ");
+                        });
                     } else if (responseArray.length == 2) {
                         int[] numbers = Arrays.stream(responseArray[1].split(",")).mapToInt(Integer::parseInt).toArray();
 

@@ -20,4 +20,9 @@ public class PokerHostController {
     protected void sendStory() throws IOException {
         HTTPHelper.sendRequest("http://localhost/Demo/room_handler.php", roomName + "," + storyTextArea.getText());
     }
+
+    @FXML
+    protected void reset() throws IOException {
+        HTTPHelper.sendRequest("http://localhost/Demo/reset.php", roomName);
+    }
 }
