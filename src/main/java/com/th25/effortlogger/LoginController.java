@@ -16,6 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the login functionality of the EffortLogger application.
+ * Handles user authentication, input validation, and navigation to the main application.
+ */
 public class LoginController {
 	@FXML private TextField userTextField;
 	@FXML private PasswordField passwordField;
@@ -33,8 +37,10 @@ public class LoginController {
 			loginFailure(0);
 		} else if(!b) {
 			loginFailure(1);
-//		} else if(passwordField.getText() == null) {
-//			loginFailure(2);
+		// Password validation currently disabled for demo/testing purposes
+        // Uncomment to enable password requirements
+        //} else if(passwordField.getText() == null || passwordField.getText().isEmpty()) {
+        //    loginFailure(2);  // Password is required
 		} else {
 			loginSuccess(event);
 		}

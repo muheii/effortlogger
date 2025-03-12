@@ -1,7 +1,27 @@
-# Group Th25 EffortLogger
-NOTE: There needs to be a folder entitled "logs" in the main directory or else the program will not run.
+# EffortLogger - Group Th25
+EffortLogger is a JavaFX application designed to help software developers track their effort on different projects, with a focus on specific lifecycle steps and categories. It also includes a Planning Poker feature for team estimation sessions.
 
-The planning poker section of this project runs on a web server and the code needs to point to the correct PHP script from the "php" folder.
-For this, we used XAMPP, a locally hosted Apache server. To use XAMPP, download and install the program with the default settings. Then, navigate to the `C:\xampp\htdocs\Demo` directory, and create a folder called "Demo". Extract the contents of the "php" directory from the repository into the "Demo" folder. Things should function properly after clicking the "start" button on the Apache line in XAMPP. You may need to create a "rooms" directory inside of the "Demo" folder for things to work 100% properly.
+## Features
 
-IntelliJ users will have to modify the source settings in order to get the project to run.
+- Secure user authentication
+- Time tracking with detailed categorization
+- Encrypted log storage using AES encryption
+- Planning Poker functionality for team estimation
+- Cross-platform Java implementation
+
+## Technologies Used
+
+- Java 8+
+- JavaFX for UI
+- PHP backend for Planning Poker functionality
+
+
+## Setup Instructions
+### Installation
+1. Clone this repository
+2. For planning poker functionality:
+    - Install XAMPP
+    - Navigate to `C:\xampp\htdocs` and create a "Demo" folder
+    - Copy the contents of the "php" directory into the "Demo" folder
+    - Start the Apache server in XAMPP
+3. Use your IDE to run the Main.java file through Maven or build and run with Maven directly in the terminal

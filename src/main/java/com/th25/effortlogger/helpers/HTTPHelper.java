@@ -10,6 +10,10 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 
+/**
+ * Helper class for handling HTTP communication with the Planning Poker PHP server.
+ * Provides methods for sending HTTP requests and processing responses.
+ */
 public class HTTPHelper {
     public static String sendRequest(String e, String s) throws IOException {
         HttpClient httpClient = HttpClientBuilder.create().build();
